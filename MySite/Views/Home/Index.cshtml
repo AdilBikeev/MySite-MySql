@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Домашняя страница";
+}
+
+<div class="jumbotron" style="background-color:#716bd7; color:white">
+    <h2>Добро пожаловать в наш магазин !</h2>
+    <h7>Ниже вам предоставлены все неоходимые услуги.</h7>
+    <p><a href="https://asp.net" class="btn btn-warning btn-lg">Learn more &raquo;</a></p>
+</div>
+
+@{
+    var user = Request.Cookies["User"];
+    if (user == null)
+    {//в случаи, если пользователь на странице еще не авторизован
+        <div class="line_block float">
+            <h2>Регистрация</h2>
+            <h7>Вы ещё не зарегестрировались на нашем сайте ? Тогда жми кнопку ниже !</h7>
+            <p style="position:relative; margin-top:30px">
+                <a href="~/Home/Registration" class="btn btn-primary btn-lg">Зарегестрироваться</a>
+            </p>
+        </div>
+        <div class="line_block float">
+            <h2>О портале</h2>
+            <h7>Узнай еще больше о нашем портале кликнув по кнопке ниже !</h7>
+            <p style="position:relative; margin-top:30px">
+                <a href="~/Home/About" class="btn btn-primary btn-lg">Подробнее</a>
+            </p>
+        </div>
+        <div class="line_block float">
+            <h2>Авторизация</h2>
+            <h7>Нажмите на кнопку ниже для того, чтобы получить больше возможностей в использовании портала !</h7>
+            <p style="position:relative; margin-top:30px">
+                <a href="~/LogIn/Autorization" class="btn btn-primary btn-lg">Войти</a>
+            </p>
+        </div>
+    }
+    else
+    {
+        <div class="line_block float">
+            <h2>Тесты</h2>
+            <h7>Желаете узнать насколько хорошо вы знаете тот или иной язык программирования ? Тогда жми кнопку ниже !</h7>
+            <p style="position:relative; margin-top:30px">
+                <a href="~/Test/ListTest" class="btn btn-success btn-lg">Перейти к тестам</a>
+            </p>
+        </div>
+        <div class="line_block float">
+            <h2>Документация</h2>
+            <h7>На нашем сайте доступна удобная со всех сторон документация по 6-ти языкам программирвоания. Помимо этого вы можете изучить ту или иную востребованную технологию или ОС</h7>
+            <p style="position:relative; margin-top:30px">
+                <a href="~/Documentation/Home" class="btn btn-warning btn-lg">Перейти к документации</a>
+            </p>
+        </div>
+        <div class="line_block float">
+            <h2>Профиль</h2>
+            <h7>На странице вашего профиля доступна вся необходимая информация в том числе и результаты пройденных тестов</h7>
+            <p style="position:relative; margin-top:30px">
+                <a href="~/Profile/Home" class="btn btn-primary btn-lg">Мой профиль</a>
+            </p>
+        </div>
+    }
+}
+
+
+
+

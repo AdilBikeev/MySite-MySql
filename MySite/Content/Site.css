@@ -1,0 +1,77 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+ .line_block {
+    border: 10px solid blue;
+    border-radius:50px;
+    background-color:white;
+    color: gray;
+    width: 320px; /*Фиксируем ширину блока*/
+}
+
+#test_block {
+    background-color:aquamarine;
+    border: 5px solid green;
+    border-radius: 50px;
+    padding: 20px;
+}
+
+.float {
+    float: left; /*Задаем обтекание*/
+    margin-right: 10px;
+    text-align: center; /*Центрируем текст по горизонтали*/
+    line-height: 15px; /*Высота строки +  верт. центрирования текста*/ margin-top: 60px;
+}
+
+ul.menu-top > li {
+    display: inline; /* Располагаем элементы по горизонтали */
+    list-style: none; /* Убираем маркеры списка */
+    margin:0;
+    padding:0;
+}
+
+
+/*Стили для валидаторов*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
