@@ -11,7 +11,7 @@ namespace MySite.Controllers
     public class LogInController : Controller
     {
 
-        SiteDbEntities db= new SiteDbEntities();
+        //SiteDb db = new SiteDb();
         [HttpGet]
         public ActionResult Autorization()//при первом вызове страницы
         {
@@ -21,17 +21,18 @@ namespace MySite.Controllers
         [HttpPost]
         public ActionResult Autorization(Users user)
         {
+            List<Users> listusers = null;
             try
             {
-                db.Users.Load();
-                foreach(Users item in db.Users.Local)
+                listusers = Users.Load();//загружаем список пользвоателей
+                foreach(Users item in listusers)
                 {
-                    if(item.Login== user.Login && item.Password == user.Password)
+                    if(item.LOGIN== user.LOGIN && item.PASSWORD == user.PASSWORD)
                     {
                         ViewBag.Msg = "";
-                        HttpCookie cookie = new HttpCookie("User");//в качестве cooki запоминаем эмаил пользователя
+                        HttpCookie cookie = new HttpCookie("User");//в качестве cookie запоминаем эмаил пользователя
                         cookie.Expires = DateTime.Now.AddDays(31);
-                        cookie.Value = item.Email;
+                        cookie.Value = item.EMAIL;
                         Response.Cookies.Add(cookie);
                         return RedirectToAction("Index","Home");//возвращаемся к домашней странцие
                     }

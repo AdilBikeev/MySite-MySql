@@ -34,20 +34,19 @@ namespace MySite.Controllers
             {
                 if(ModelState.IsValid)
                 {
-                    dbSite.Users.Load();
-                    foreach (Users item in dbSite.Users.Local)
+                    List<Users> users = Users.Load();
+                    foreach (Users item in users)
                     {
-                        if (item.Login == user.Login)
+                        if (item.LOGIN == user.LOGIN)
                         {
                             throw new Exception("Пользователь с таким логином уже существует !");
                         }
-                        else if (item.Email == user.Email)
+                        else if (item.EMAIL == user.EMAIL)
                         {
                             throw new Exception("Пользователь с таким Email уже существует !");
                         }
                     }
-                    dbSite.Users.Add(user);//добавляем новго пользователя в БД
-                    dbSite.SaveChanges();//слхраняем изменения
+                    users.Add(user);//добавляем новго пользователя в БД
                     return View("Thanks", (object)"Регистрация пройдена успешно !");
                 }
                 return View();

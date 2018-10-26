@@ -11,7 +11,7 @@ namespace MySite.Controllers
 {
     public class TestController : Controller
     {
-        SiteDbEntities siteDb = new SiteDbEntities();
+        //SiteDbEntities siteDb = new SiteDbEntities();
         //выбранный тест SelectedTest
 
         // GET: Test
@@ -22,6 +22,7 @@ namespace MySite.Controllers
 
         public ActionResult Result(string SelectedTest)//Выводит результат тестирвоания
         {
+            List<Sharp> sharp = null;
             try
             {
                 if (Request.Cookies["user"] != null)//если пользователь авторизован на странице
@@ -30,21 +31,25 @@ namespace MySite.Controllers
                     {
                         case "Sharp":
                             {
-                                siteDb.Sharp.Load();//загружаем данные из бд с правильными ответами 
-                                int maxAnsTruth = siteDb.Sharp.Local.Count();//запоминаем кол-во вопросов
+                                sharp = Sharp.Load();//загружаем данные из бд с правильными ответами 
+                                int maxAnsTruth = sharp.Count();//запоминаем кол-во вопросов
                                 int noRightAns = 0;//кол-во неправильных ответов
 
                                 for (int i = 1; i <= maxAnsTruth; i++)//пробегаемся по всем вопросам
                                 {
-                                    if (Request.Form["quest" + i.ToString()] != siteDb.Sharp.Local.First(x => x.Id == i).numAnswer.ToString())//если пользователь выбрал неправильный ответ
+                                    if (Request.Form["quest" + i.ToString()] != sharp.First(x => x.ID == i).NUMANSWER.ToString())//если пользователь выбрал неправильный ответ
                                     {
                                         noRightAns++;
                                     }
                                 }
+
+                                List<Users> users = Users.Load();// загружаем данные из бд с пользователями
+
                                 double percentRes = ((double)(maxAnsTruth - noRightAns) / (double)(maxAnsTruth + noRightAns)) * 100;//процентное соотношение  неправильных ответов
                                 string email = Request.Cookies["user"].Value;//запоминаем email авторизованного пользователя
-                                siteDb.Users.First(x => x.Email == email).Sharp = Convert.ToInt32(percentRes);//запоминаем результат прохождения теста в учетной записи пользователя
-                                siteDb.SaveChanges();//сохраняем изменения в БД
+
+                                users.First(x => x.EMAIL == email).SHARP = Convert.ToInt32(percentRes);//запоминаем результат прохождения теста в учетной записи пользователя
+                                Users.SaveChanges(users.First(x => x.EMAIL == email));//сохраняем изменения в БД
 
                                 if (percentRes >= 90)
                                 {

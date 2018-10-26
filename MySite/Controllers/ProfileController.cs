@@ -10,18 +10,19 @@ namespace MySite.Controllers
 {
     public class ProfileController : Controller
     {
-        SiteDbEntities siteDb = new SiteDbEntities();
+        SiteDb siteDb = new SiteDb();
 
         // GET: Profile
         public ViewResult Home()//возвращает домашнюю страницу профиля
         {
+            List<Users> listusers = null;
             try
             {
                 if (Request.Cookies["user"] != null)//если пользователь авторизован на странице
                 {
-                    siteDb.Users.Load();//загрыжаем данные о пользователях из БД
+                    listusers = Users.Load();//загрыжаем данные о пользователях из БД
                     string email = Request.Cookies["user"].Value;
-                    Users user = siteDb.Users.First(x => x.Email == email);//находим в БД плзователя с указанным в куки Email
+                    Users user = listusers.First(x => x.EMAIL == email);//находим в БД плзователя с указанным в куки Email
                     return View(user);
                 }
                 else
@@ -44,25 +45,26 @@ namespace MySite.Controllers
         [HttpPost]
         public ActionResult Edit(Users user)//возвращаю страницу для изменения данных профиля
         {
+            List<Users> listUsers = null;
             try
             {
                 if(ModelState.IsValid)//если валидация пройдена успешно
                 {
-                    siteDb.Users.Load();//загружаем данные из БД
+                    listUsers = Users.Load();//загружаем данные из БД
 
                     string Email = Request.Cookies["User"].Value;
 
-                    Users newUser = siteDb.Users.First(x => x.Email == Email);
+                    Users newUser = listUsers.First(x => x.EMAIL == Email);
 
-                    int index = siteDb.Users.Local.IndexOf(newUser);//находим индекс авторизованного пользователя в коллекции
+                    int index = listUsers.IndexOf(newUser);//находим индекс авторизованного пользователя в коллекции
 
                     //запоминание отредактированные данные о пользователе
-                    siteDb.Users.Local[index].Name = user.Name;
-                    siteDb.Users.Local[index].Surname = user.Surname;
-                    siteDb.Users.Local[index].AboutOneself = user.AboutOneself;
-                    siteDb.Users.Local[index].DateBirthDay = user.DateBirthDay;
+                    listUsers[index].NAME = user.NAME;
+                    listUsers[index].SURNAME = user.SURNAME;
+                    listUsers[index].ABOUTONESELF = user.ABOUTONESELF;
+                    listUsers[index].DATEBIRTHDAY = user.DATEBIRTHDAY;
 
-                    siteDb.SaveChanges();//сохраняем измененияы
+                    Users.SaveChanges(listUsers[index]);//сохраняем измененияы
                     throw new Exception("Изменения успешно сохранены !");
                 }
                 else

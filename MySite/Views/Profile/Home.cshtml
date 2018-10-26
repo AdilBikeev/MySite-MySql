@@ -24,10 +24,10 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card mb-4 box-shadow">
-                    <b>Имя</b>&nbsp;&nbsp;&nbsp;@Html.DisplayFor(x => x.Name) <br />
-                    <b>Фамилия</b>&nbsp;&nbsp;&nbsp;@Html.DisplayFor(x => x.Surname) <br />
-                    <b>Дата рождения</b>&nbsp;&nbsp;&nbsp;@Model.DateBirthDay.ToLongDateString() <br />
-                    <b>Email</b>&nbsp;&nbsp;&nbsp;@Html.DisplayFor(x => x.Email)
+                    <b>Имя</b>&nbsp;&nbsp;&nbsp;@Html.DisplayFor(x => x.NAME) <br />
+                    <b>Фамилия</b>&nbsp;&nbsp;&nbsp;@Html.DisplayFor(x => x.SURNAME) <br />
+                    <b>Дата рождения</b>&nbsp;&nbsp;&nbsp;@Model.DATEBIRTHDAY <br />
+                    <b>Email</b>&nbsp;&nbsp;&nbsp;@Html.DisplayFor(x => x.EMAIL)
 
                     <!--Обновление страницы профиля, добавлена информация: имя, фамиля, дата рождения, о себе-->
 
@@ -41,7 +41,7 @@
         <div class="row">
             <div class="col-md-12">
                     <b>О себе</b><br />
-                    @Html.DisplayFor(x=>x.AboutOneself)
+                    @Html.DisplayFor(x=>x.ABOUTONESELF)
             </div>
         </div>
         <hr />
@@ -52,7 +52,7 @@
         <li>
             <i>C# &nbsp;&nbsp;&nbsp;&nbsp;</i>
             <div class="progress">
-                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:@Model.Sharp%"
+                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:@Model.SHARP%"
                      aria-valuemin="0" aria-valuemax="100"></div>
             </div>
         </li>
